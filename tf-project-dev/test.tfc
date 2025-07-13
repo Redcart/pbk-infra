@@ -1,0 +1,23 @@
+resource "google_cloud_scheduler_job" "sql_publibike_capacity" {
+  name             = "sql-publibike-capacity"
+  description      = "cloud scheduler for sql layer publibike capacity"
+  schedule         = "2 * * * *"
+  time_zone        = "Europe/Zurich"
+  attempt_deadline = "300s"
+
+  retry_config {
+    retry_count = 1
+  }
+
+  http_target {
+    http_method = "POST"
+    uri         = "https://${var.region}-${var.project_id}.cloudfunctions.net/sql-publibike"
+    headers = {
+      "Content-Type" = "application/json"
+    }
+    oidc_token {
+            audience              = "https://${var.region}-${var.project_id}.cloudfunctions.net/sql-publibike"
+            service_account_email = module.service_account_project_runtime.service_account.email
+            }
+  }
+}
