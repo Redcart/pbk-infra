@@ -1,0 +1,17 @@
+terraform import google_bigquery_dataset.big_query_dataset_ingestion western-evening-460513-e6/api_pbk_data
+
+terraform import google_bigquery_table.big_query_table_ingestion_stations western-evening-460513-e6/api_pbk_data/stations
+
+terraform import google_bigquery_table.big_query_table_ingestion_bikes_capacity western-evening-460513-e6/api_pbk_data/capacity
+
+
+terraform import 'module.service_account_pbk_ingestion_runtime.google_service_account.service_accounts["pbk-ingest"]'  projects/western-evening-460513-e6/serviceAccounts/pbk-ingest@western-evening-460513-e6.iam.gserviceaccount.com
+terraform import 'module.service_account_pbk_github_actions_cicd.google_service_account.service_accounts["pbk-gh-cicd"]'  projects/western-evening-460513-e6/serviceAccounts/pbk-gh-cicd@western-evening-460513-e6.iam.gserviceaccount.com
+
+terraform import google_iam_workload_identity_pool_provider.github_provider western-evening-460513-e6/github-wip/github-provider
+terraform import  google_iam_workload_identity_pool.github_wip western-evening-460513-e6/github-wip
+
+terraform import google_cloud_scheduler_job.cs_pbk_stations western-evening-460513-e6/europe-west6/pbk-etl-stations
+terraform import google_cloud_scheduler_job.cs_pbk_bikes_capacity western-evening-460513-e6/europe-west6/pbk-etl-bikes
+
+terraform import module.gcs_bucket_pbk_ingestion.google_storage_bucket.bucket western-evening-460513-e6/gcs-pbk-ingest-prd
