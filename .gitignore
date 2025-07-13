@@ -1,5 +1,6 @@
-*.json
+\*.json
 *.tfstate*
 *.txt
 *.txt
 *.terraform/*
+*.tfc
