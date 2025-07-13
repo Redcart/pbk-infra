@@ -1,0 +1,7 @@
+*.json
+*.txt
+*.tfc
+*.tfstate*
+variables*
+*.hcl
+.terraform
